@@ -19,7 +19,7 @@ class LinkshareCouponAPITest < Test::Unit::TestCase
     XML
     stub_request(
       :get,
-      "http://couponfeed.linksynergy.com/coupon?network=1&token=#{token}"
+      "https://api.rakutenmarketing.com/coupon/1.0?network=1"
       ).
       to_return(
         status: 200,
@@ -44,7 +44,7 @@ class LinkshareCouponAPITest < Test::Unit::TestCase
     XML
     stub_request(
       :get,
-      "http://couponfeed.linksynergy.com/coupon?network=1&token=#{token}"
+      "https://api.rakutenmarketing.com/coupon/1.0?network=1"
       ).
       to_return(
         status: 200,
@@ -69,7 +69,7 @@ class LinkshareCouponAPITest < Test::Unit::TestCase
     XML
     stub_request(
       :get,
-      "http://couponfeed.linksynergy.com/coupon?network=15&token=#{token}"
+      "https://api.rakutenmarketing.com/coupon/1.0?network=15"
       ).
       to_return(
         status: 200,
@@ -94,12 +94,12 @@ class LinkshareCouponAPITest < Test::Unit::TestCase
     XML
     stub_request(
       :get,
-      "http://couponfeed.linksynergy.com/coupon?network=15&token=#{token}"
+      "https://api.rakutenmarketing.com/coupon/1.0?network=15"
       ).
       to_return(
         status: 200,
         body: xml_response,
-        headers: { "Content-type" => "text/xml; charset=UTF-8" }
+        headers: { "Content-type" => "text/xml; charset=UTF-8"}
     )
     e = assert_raise LinkshareAPI::InvalidRequestError do
       LinkshareAPI.coupon_web_service(network: 15)
@@ -120,7 +120,7 @@ class LinkshareCouponAPITest < Test::Unit::TestCase
     XML
     stub_request(
       :get,
-      "http://couponfeed.linksynergy.com/coupon?network=1&promotiontype=30&token=#{token}"
+      "https://api.rakutenmarketing.com/coupon/1.0?network=1&promotiontype=30"
       ).
       to_return(
         status: 200,
@@ -186,7 +186,7 @@ class LinkshareCouponAPITest < Test::Unit::TestCase
     XML
     stub_request(
       :get,
-      "http://couponfeed.linksynergy.com/coupon?network=1&promotiontype=22&token=#{token}"
+      "https://api.rakutenmarketing.com/coupon/1.0?network=1&promotiontype=22"
       ).
       to_return(
         status: 200,
@@ -350,27 +350,27 @@ class LinkshareCouponAPITest < Test::Unit::TestCase
     XML
     stub_request(
       :get,
-      "http://couponfeed.linksynergy.com/coupon?network=1&promotiontype=22&token=#{token}"
-      ).
-      to_return(
+      "https://api.rakutenmarketing.com/coupon/1.0?network=1&promotiontype=22"
+      ).with(:headers => {'Authorization'=>'Bearer abcdef'})
+      .to_return(
         status: 200,
         body: xml_response1,
         headers: { "Content-type" => "text/xml; charset=UTF-8" }
     )
     stub_request(
       :get,
-      "http://couponfeed.linksynergy.com/coupon?network=1&promotiontype=22&pagenumber=2&token=#{token}"
-      ).
-      to_return(
+      "https://api.rakutenmarketing.com/coupon/1.0?network=1&promotiontype=22&pagenumber=2"
+      ).with(:headers => {'Authorization'=>'Bearer abcdef'})
+      .to_return(
         status: 200,
         body: xml_response2,
         headers: { "Content-type" => "text/xml; charset=UTF-8" }
     )
     stub_request(
       :get,
-      "http://couponfeed.linksynergy.com/coupon?network=1&promotiontype=22&pagenumber=3&token=#{token}"
-      ).
-      to_return(
+      "https://api.rakutenmarketing.com/coupon/1.0?network=1&promotiontype=22&pagenumber=3"
+      ).with(:headers => {'Authorization'=>'Bearer abcdef'})
+      .to_return(
         status: 200,
         body: xml_response3,
         headers: { "Content-type" => "text/xml; charset=UTF-8" }
@@ -389,4 +389,4 @@ class LinkshareCouponAPITest < Test::Unit::TestCase
   end
 
 end
- 
+

@@ -22,7 +22,7 @@ module LinkshareAPI
     link_generator: "http://getdeeplink.linksynergy.com/createcustomlink.shtml",
     deep_linking: "http://click.linksynergy.com/deeplink",
     product_search: "http://productsearch.linksynergy.com/productsearch",
-    coupon_web_service: "http://couponfeed.linksynergy.com/coupon"
+    coupon_web_service: "https://api.rakutenmarketing.com/coupon/1.0"
   }
 
   PARSE_RESULT = {

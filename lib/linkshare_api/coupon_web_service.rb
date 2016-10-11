@@ -27,18 +27,18 @@ module LinkshareAPI
     def query(params)
       raise ArgumentError, "Hash expected, got #{params.class} instead" unless params.is_a?(Hash)
 
-      params.merge!(token: token)
       begin
         response = self.class.get(
           api_base_url,
-          query: params
+          query: params,
+          headers: { "Authorization" => "Bearer #{@token}" }
         )
       rescue Timeout::Error, Net::OpenTimeout
         raise ConnectionError.new("Timeout error (#{api_timeout}s)")
       end
 
       if response.code != 200
-        raise Error.new(response.message, response.code)
+        raise Error.new(response.message, response.code, response.body)
       end
       error = response["fault"]
       raise InvalidRequestError.new(error["errorstring"], error["errorcode"].to_i) if error
